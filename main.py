@@ -1,4 +1,6 @@
-class MotionPicture:
+from abc import ABC, abstractmethod
+
+class MotionPicture(ABC):
     def __init__(self, title, director):
         self.title = title
         self.director = director
@@ -12,8 +14,9 @@ class MotionPicture:
         print(f"⏸ Paused '{self.title}'.")
         self.isnotplaying = True
 
+    @abstractmethod
     def get_info(self):
-        print(f"\nTitle: {self.title}\nDirector: {self.director}")
+        pass
 
 
 class Movie(MotionPicture):
@@ -21,6 +24,9 @@ class Movie(MotionPicture):
         super().__init__(title, director)
         self.duration = duration
         self.genre = genre
+
+    def get_info(self):
+        print(f"\nTitle: {self.title}\nDirector: {self.director}\nGenre: {self.genre}")
 
     def get_duration(self):
         print(f"Duration: {self.duration} minutes")
@@ -37,6 +43,9 @@ class Series(MotionPicture):
         super().__init__(title, director)
         self.seasons = seasons
         self.current_episode = current_episode
+
+    def get_info(self):
+        print(f"\nTitle: {self.title}\nDirector: {self.director}\nSeasons: {self.seasons}")
 
     def get_seasons(self):
         print(f"Number of Seasons: {self.seasons}")
@@ -55,6 +64,9 @@ class Documentary(MotionPicture):
         self.topic = topic
         self.narrator = narrator
         self.statistics = statistics
+
+    def get_info(self):
+        print(f"\nTitle: {self.title}\nDirector: {self.director}\nTopic: {self.topic}\nNarrated by: {self.narrator}")
 
     def get_topic(self):
         print(f"Topic: {self.topic}")
@@ -75,6 +87,9 @@ class ShortFilm(MotionPicture):
         self.length = length
         self.award_won = award_won
 
+    def get_info(self):
+        print(f"\nTitle: {self.title}\nDirector: {self.director}\nLength: {self.length} minutes")
+
     def get_length(self):
         print(f"Short film length: {self.length} minutes")
 
@@ -83,6 +98,7 @@ class ShortFilm(MotionPicture):
 
     def show_award(self):
         print(f"🏆 '{self.title}' won the '{self.award_won}' award!")
+
 
 
 # Collections
@@ -224,3 +240,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
